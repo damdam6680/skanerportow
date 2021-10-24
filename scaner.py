@@ -1,5 +1,6 @@
 from socket import *
 import sys
+import argparse
 def conScan(tgtHost, tgtPort):
     try:
         connskt = socket(AF_INET,SOCK_STREAM)
@@ -25,7 +26,9 @@ def portScan(tgtHost, tgtPorts):
         conScan(tgtHost, int(tgtPort))                  
 
 if __name__ == '__main__':
-    opts = [opt for opt in sys.argv[1:] if opt.startswith("-")]
-    
-
-    portScan(list[0],[int(list[1])])
+    parser = argparse.ArgumentParser(description='Personal information')
+    parser.add_argument('--ip', dest='ip', type=str, help='adres ip',required=True)
+    parser.add_argument('--port', dest='port', nargs='+',type=int, help='port',required=True)
+    args = parser.parse_args()
+    print(args.port)
+    portScan(args.ip,args.port)
